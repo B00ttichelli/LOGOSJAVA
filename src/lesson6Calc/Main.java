@@ -10,20 +10,11 @@ public class Main {
         Mycalculator mycalc = new Mycalculator();
         System.out.println("Введите два целых числа через ентер");
         Scanner scanner = new Scanner(System.in);
-        int a = 0;
-        int b = 0;
-        if(scanner.hasNextInt()){
-             a = scanner.nextInt();
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
 
-        }
-        else {
-            System.out.println(" Введите целое число");
 
-        }
 
-        if (scanner.hasNextInt()){
-            b = scanner.nextInt();
-        }
 
         System.out.println(mycalc.devide(a,b));
         System.out.println(mycalc.minus(a,b));
