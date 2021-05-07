@@ -1,6 +1,6 @@
 package lesson8enum;
 
-import java.util.Locale;
+
 
 public enum Months {
     JANUARY(31, Seasons.WINTER, "January", "Jan"),
@@ -19,13 +19,13 @@ public enum Months {
 
     int dayquantity;
     Seasons season;
-    String name;
+    String sname;
     String shorname;
 
     Months(int dayquantity, Seasons season, String name, String shorname) {
         this.dayquantity = dayquantity;
         this.season = season;
-        this.name = name;
+        this.sname = name;
         this.shorname = shorname;
     }
 
@@ -34,26 +34,22 @@ public enum Months {
         return "Months{" +
                 "dayquantity=" + dayquantity +
                 ", season=" + season +
-                ", name='" + name + '\'' +
+                ", name='" + sname + '\'' +
                 ", shorname='" + shorname + '\'' +
                 '}';
     }
 
     public boolean theEven() {
         // проверка на парные дни
-        if (this.dayquantity % 2 == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.dayquantity % 2 == 0;
     }
 
-    static public Months getMonthByString(String name) throws RuntimeException {
+    static public Months getMonthByString(String name) throws IllegalArgumentException {
         boolean flag = false;
         for (Months x : Months.values()
         ) {
 
-            if (x.name.toUpperCase().equals(name.toUpperCase())) {
+            if (x.name().equals(name.toUpperCase())) {
 
                 flag = true;
                 return x;
@@ -61,7 +57,7 @@ public enum Months {
 
         }
         if (!flag) {
-            throw new RuntimeException("Month " + name + " dont exist");
+            throw new IllegalArgumentException("Month " + name + " dont exist");
 
         }
 
