@@ -9,8 +9,8 @@ public class Task3 {
     Якщо a=0 і b=0 викидаємо IllegalAccessException
     Якщо a>0 і b>0 викидаємо MyException
     Протестувати всі можливі варіанти, і вивести все на консоль.*/
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
         try {
 
             myTry(0,0);
