@@ -7,11 +7,13 @@ import java.util.regex.Pattern;
 
 public class Task1 {
     public static void main(String[] args) {
-        /*1) Користувач вводить слова з консолі, в масив додавати лише ті, що починаються на “a”.*/
+        /*1) Користувач вводить слова з консолі, в масив додавати лише ті, що починаються на “a”.
+        *
+        * */
 
         System.out.println("Type a word or type EXIT if u wish to stop the program");
         Scanner scanner  = new Scanner(System.in);
-        ArrayList<String> array = new ArrayList<String>();
+        ArrayList<String> array = new ArrayList<>();
         String input;
         boolean exitflag = true;
 

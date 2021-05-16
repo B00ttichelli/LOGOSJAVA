@@ -6,7 +6,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /*2) Зробити валідацію для емейл-адрес, зберігати лише ті, які закінчуються на
-@gmail.com*/
+@gmail.com*
+
+/
+ */
 
 
 public class Task2 {

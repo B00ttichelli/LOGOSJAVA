@@ -5,7 +5,9 @@ public class Task3 {
  String str = "I love Java more than my friend. Java is so beautiful.";
 ● перевірити чи є в стрічці слово “Java”;
 ● замінити слово “Java” на “C#”;
-● замінити всі слова “Java” на “C#”;
+● замінити всі слова “Java” на “C#”
+
+;
 */
     public static void main(String[] args) {
 
