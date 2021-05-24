@@ -11,7 +11,4 @@ public class Game {
     private List <Player> players  = new ArrayList<>();
     private Random random = new Random();
 
-
-
-
 }

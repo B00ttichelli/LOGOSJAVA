@@ -28,7 +28,7 @@ public class Main {
         showAll(arr);
         showSWords(arr);
         showMoreThan5(arr);
-
+        
     }
 
     public static void showAll(List<String> arr) {
