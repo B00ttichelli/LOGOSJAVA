@@ -1,9 +1,6 @@
 package Lesson17InnerClases;
 
-import Lesson13Iterator.LengthComparator;
-import Lesson13Iterator.Product;
-import Lesson13Iterator.WeigthComparator;
-import Lesson13Iterator.WidthComparator;
+
 
 import java.util.*;
 
@@ -11,19 +8,19 @@ public class Commodity {
 
     private static List<Product> products = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
-    private static final WeigthComparator weigthComparator = new WeigthComparator(){
+    private static final Comparator<Product> weigthComparator = new Comparator<Product>(){
         @Override
         public int compare(Product product, Product t1) {
             return Integer.compare(product.getWeight(), t1.getWeight());
         }
     };
-    private static final LengthComparator lengthComparator = new LengthComparator(){
+    private static final Comparator<Product> lengthComparator = new Comparator<Product>(){
         @Override
         public int compare(Product product, Product t1) {
             return Integer.compare(product.getLength(),t1.getLength());
         }
     };
-    private static final WidthComparator widthComparator = new WidthComparator(){
+    private static final Comparator<Product> widthComparator = new Comparator<Product>(){
         @Override
         public int compare(Product product, Product t1) {
             return Integer.compare(product.getWidth(),t1.getWidth());

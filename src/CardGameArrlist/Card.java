@@ -12,5 +12,11 @@ private Suit suit;
         this.suit = suit;
     }
 
-
+    @Override
+    public String toString() {
+        return "Card{" +
+                "rank=" + rank +
+                ", suit=" + suit +
+                '}';
+    }
 }
