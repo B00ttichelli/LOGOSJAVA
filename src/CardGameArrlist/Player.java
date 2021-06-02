@@ -7,11 +7,25 @@ abstract class Player implements GamePlay {
     protected String name;
     protected List<Card> hand = new ArrayList<>();
 
+
     public List<Card> getHand() {
         return hand;
     }
-
-    public void setHand(List<Card> hand) {
-        this.hand = hand;
+    public void addCard (Card card){
+        this.hand.add(card);
     }
+
+    public Rank lowTrump (Suit suit){
+            Rank result = Rank.ASS;
+        for (Card card: hand
+             ) {
+            if(card.getSuit().equals(suit) && card.getRank().ordinal() <= result.ordinal()){
+                result = card.getRank();
+            }
+
+        }
+        return result;
+    }
+
+
 }
