@@ -3,16 +3,24 @@ package CardGameArrlist;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class Player implements GamePlay {
+abstract class Player {
     protected String name;
     protected List<Card> hand = new ArrayList<>();
-
+    protected boolean isAtcker = false;
 
     public List<Card> getHand() {
         return hand;
     }
     public void addCard (Card card){
         this.hand.add(card);
+    }
+
+    public boolean isAtcker() {
+        return isAtcker;
+    }
+
+    public void setAtcker(boolean atcker) {
+        isAtcker = atcker;
     }
 
     public Rank lowTrump (Suit suit){
@@ -26,6 +34,8 @@ abstract class Player implements GamePlay {
         }
         return result;
     }
+
+    abstract public Card Attack();
 
 
 }

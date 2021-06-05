@@ -44,6 +44,13 @@ public class Game {
     public void startGame (){
 
         // логика игры
+        players.get(0).setAtcker(true);
+        for (Player player:players
+             ) {
+            if(player.isAtcker()){
+                table.add(player.Attack());
+            }
+        }
 
     }
 
@@ -70,7 +77,7 @@ public class Game {
         this.trump = deck.get(randomindex).getSuit();
 
     }
-
+        // игрок с найменьшим козырем будет в начале списка игроков
     private void declareBeginner(){
         Comparator<Player> trumpComparator = new Comparator<>() {
             @Override
@@ -79,6 +86,7 @@ public class Game {
             }
         };
         this.players.sort(trumpComparator);
+
 
 
     }
