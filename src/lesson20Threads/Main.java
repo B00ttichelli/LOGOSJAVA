@@ -20,7 +20,8 @@ public class Main {
         myThread.start();
         myThread.join(); // конешно весь смылс Мультитреда иза этого по пизде, но попробуй убери и посмотри какое говно будет ))
         RunnableThread runnableThread = new RunnableThread();
-        runnableThread.run();
+        Thread thread = new Thread(runnableThread);
+        thread.start();
     }
 
 }
