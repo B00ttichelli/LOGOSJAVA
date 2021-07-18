@@ -7,6 +7,7 @@ abstract class Player {
     protected String name;
     protected List<Card> hand = new ArrayList<>();
     protected boolean isAtcker = false;
+/*    protected boolean isResponder = false;*/
 
     public List<Card> getHand() {
         return hand;
@@ -18,13 +19,15 @@ abstract class Player {
     public boolean isAtcker() {
         return isAtcker;
     }
-
+ /*   public boolean isResponder() {return isResponder; }*/
     public void setAtcker(boolean atcker) {
         isAtcker = atcker;
     }
+   /* public void setResponder(boolean responder) {isResponder = responder;}*/
+
 
     public Rank lowTrump (Suit suit){
-            Rank result = Rank.ASS;
+            Rank result = Rank.ACE;
         for (Card card: hand
              ) {
             if(card.getSuit().equals(suit) && card.getRank().ordinal() <= result.ordinal()){
@@ -36,6 +39,7 @@ abstract class Player {
     }
 
     abstract public Card Attack();
+    abstract public Card Respond(ArrayList<Card> table);
 
 
 }

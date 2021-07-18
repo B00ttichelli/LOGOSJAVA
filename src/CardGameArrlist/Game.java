@@ -5,21 +5,19 @@ import java.util.*;
 public class Game {
     private static Scanner scanner = new Scanner(System.in);
     private static Random random = new Random();
-    private List <Card> deck  = new ArrayList<>();
-    private List <Card> table = new ArrayList<>() ;
-    private List <Card> discarded  = new ArrayList<>();
-    private List <Player> players  = new ArrayList<>();
+    private ArrayList<Card> deck = new ArrayList<>();
+    private ArrayList<Card> table = new ArrayList<>();
+    private ArrayList<Card> discarded = new ArrayList<>();
+    private ArrayList<Player> players = new ArrayList<>();
     private Suit trump;
+    private List<Player> winner = new ArrayList<>();
 
 
-
-
-
-    private void generateDeck (){
-        for (Suit suit: Suit.values()
-             ) {
-            for (Rank rank: Rank.values()
-                 ) {
+    private void generateDeck() {
+        for (Suit suit : Suit.values()
+        ) {
+            for (Rank rank : Rank.values()
+            ) {
                 Card card = new Card();
                 card.setSuit(suit);
                 card.setRank(rank);
@@ -29,7 +27,7 @@ public class Game {
         }
     }
 
-    public void initGame () {
+    public void initGame() {
         generateDeck();
         System.out.println("Type your name");
         ConsolePlayer consolePlayer = new ConsolePlayer(scanner.next());
@@ -41,44 +39,94 @@ public class Game {
         declareBeginner();
 
     }
-    public void startGame (){
+
+    public void startGame() {
 
         // логика игры
-        players.get(0).setAtcker(true);
-        for (Player player:players
-             ) {
-            if(player.isAtcker()){
-                table.add(player.Attack());
+
+        int nextplayer = 0;
+        while (players.size() > 1 ) {
+            for (int i = 0; i < players.size(); i++) {
+                if (nextplayer >= players.size()) {
+                    nextplayer = nextplayer - players.size();
+                } else {
+                    nextplayer = i + 1;
+                }
+                if (players.get(i).isAtcker()) {
+                    table.add(players.get(i).Attack());
+                    players.get(i).setAtcker(false);
+                    table.add(players.get(nextplayer).Respond(table));
+                    if(table.get(table.size()-1)==null){
+                        table.remove(table.size()-1);
+                        for (Card card:table
+                             ) {
+                            players.get(nextplayer).addCard(card);
+
+
+                        }
+                        table.clear();
+                        players.get(nextplayer+1).setAtcker(true); /// проблема решить завтра
+                        dealCards();
+                        if(players.get(i).getHand().isEmpty()){
+                            winner.add(players.get(i));
+                            players.removeAll(winner);
+                        }
+                    }else {
+                        for (Card card: table
+                             ) {
+                            discarded.add(card);
+
+                        }
+                        table.clear();
+                        players.get(nextplayer).setAtcker(true);
+                        dealCards();
+                        if(players.get(i).getHand().isEmpty()){
+                            winner.add(players.get(i));
+                            players.removeAll(winner);
+                        }
+                        if(players.get(nextplayer).getHand().isEmpty()){
+                            winner.add(players.get(nextplayer));
+                            players.removeAll(winner);
+                        }
+                    }
+                }
+            }
+            /// конец круга по логике
+
+
+        }
+    }
+
+    private int howmuchtodeal(Player player) {
+        return player.getHand().size() >= 6 ? 0 : 6 - player.getHand().size();
+    }
+
+    private void dealCards() {
+
+        if (!deck.isEmpty()){
+            for (Player player : players
+            ) {
+                for (int i = 0; i < howmuchtodeal(player); i++) {
+                    //рандомно вытягиваем карту из колоды и даем в руки каждому  играку
+                    int randomindex = random.nextInt(deck.size());
+                    player.addCard(deck.get(randomindex));
+                    deck.remove(randomindex);
+
+                }
+
             }
         }
 
     }
 
-    private int howmuchtodeal(Player player){
-        return player.getHand().size()>=6?0:6-player.getHand().size();
-    }
-    private void dealCards (){
-
-        for (Player player: players
-             ) {
-            for (int i = 0; i < howmuchtodeal(player); i++) {
-                //рандомно вытягиваем карту из колоды и даем в руки каждому  играку
-                int randomindex = random.nextInt(deck.size());
-                player.addCard(deck.get(randomindex));
-                deck.remove(randomindex);
-
-            }
-
-        }
-
-    }
-    private void setTrump(){
+    private void setTrump() {
         int randomindex = random.nextInt(deck.size());
         this.trump = deck.get(randomindex).getSuit();
 
     }
-        // игрок с найменьшим козырем будет в начале списка игроков
-    private void declareBeginner(){
+
+    // игрок с найменьшим козырем будет в начале списка игроков
+    private void declareBeginner() {
         Comparator<Player> trumpComparator = new Comparator<>() {
             @Override
             public int compare(Player player, Player t1) {
@@ -86,8 +134,11 @@ public class Game {
             }
         };
         this.players.sort(trumpComparator);
+        players.get(0).setAtcker(true);
 
+    }
 
+    private void checkGameStatus(){
 
     }
 }
