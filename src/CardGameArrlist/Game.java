@@ -65,7 +65,12 @@ public class Game {
 
                         }
                         table.clear();
-                        players.get(nextplayer+1).setAtcker(true); /// проблема решить завтра
+                        if(nextplayer+1 >= players.size()){
+                            players.get(players.size()-(nextplayer+1)).setAtcker(true);
+                        }else{
+                            players.get(nextplayer+1);
+                        }
+                       /* players.get(nextplayer+1).setAtcker(true); /// проблема решить завтра*/
                         dealCards();
                         if(players.get(i).getHand().isEmpty()){
                             winner.add(players.get(i));
