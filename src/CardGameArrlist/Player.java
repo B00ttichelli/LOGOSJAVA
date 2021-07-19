@@ -7,7 +7,16 @@ abstract class Player {
     protected String name;
     protected List<Card> hand = new ArrayList<>();
     protected boolean isAtcker = false;
-/*    protected boolean isResponder = false;*/
+    protected  Suit tramp;
+
+    public Suit getTramp() {
+        return tramp;
+    }
+
+    public void setTramp(Suit tramp) {
+        this.tramp = tramp;
+    }
+    /*    protected boolean isResponder = false;*/
 
     public List<Card> getHand() {
         return hand;

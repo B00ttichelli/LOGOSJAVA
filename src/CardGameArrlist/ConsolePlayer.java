@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 public class ConsolePlayer extends Player {
 
+
+
     public ConsolePlayer(String name) {
         super.name = name;
     }
@@ -22,9 +24,27 @@ public class ConsolePlayer extends Player {
         List<Card> bigestInHand = hand.stream().filter(
                 (a) -> a.getSuit().equals(card.getSuit())).filter(
                 (a) -> a.getRank().ordinal() > card.getRank().ordinal()).collect(Collectors.toList());
-    //дописать
-        System.out.println("Select one of those cards");
-        return null;
+        //добавляем козыри
+        bigestInHand.addAll(hand.stream().filter((a)->a.getSuit().equals(getTramp())).collect(Collectors.toList()));
+
+
+        if(bigestInHand.size()>0){
+            Scanner scanner =  new Scanner(System.in);
+            System.out.println("Select one of those cards");
+            for (int i = 0; i < bigestInHand.size(); i++) {
+                System.out.println(i+" : " + bigestInHand.get(i));
+            }
+            int choice  =  scanner.nextInt();
+            hand.remove(bigestInHand.get(choice));
+            return bigestInHand.get(choice);
+
+        }
+        else {
+            System.out.println("You cant beat this card");
+            return null;
+        }
+
+
     }
 
     @Override

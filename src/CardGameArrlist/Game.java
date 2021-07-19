@@ -127,7 +127,9 @@ public class Game {
     private void setTrump() {
         int randomindex = random.nextInt(deck.size());
         this.trump = deck.get(randomindex).getSuit();
-
+        for (Player player:players){
+            player.setTramp(trump);
+        }
     }
 
     // игрок с найменьшим козырем будет в начале списка игроков
