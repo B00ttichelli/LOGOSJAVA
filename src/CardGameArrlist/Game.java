@@ -47,7 +47,7 @@ public class Game {
         int nextplayer = 0;
         while (players.size() > 1 ) {
             for (int i = 0; i < players.size(); i++) {
-                if (nextplayer >= players.size()) {
+                if (nextplayer >= players.size()-1) {
                     nextplayer = nextplayer - players.size();
                 } else {
                     nextplayer = i + 1;

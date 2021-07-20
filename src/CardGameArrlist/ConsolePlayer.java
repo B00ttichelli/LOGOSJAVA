@@ -17,7 +17,7 @@ public class ConsolePlayer extends Player {
     public Card Respond(ArrayList<Card> table) {
 
         System.out.println("is you turn now, u must beat this card");
-        Card card = table.get(table.size());
+        Card card = table.get(table.size()-1);
         System.out.println(card);
 
 
