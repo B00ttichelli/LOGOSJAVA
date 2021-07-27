@@ -48,7 +48,7 @@ public class Game {
         while (players.size() > 1 ) {
             for (int i = 0; i < players.size(); i++) {
                 if (nextplayer >= players.size()-1) {
-                    nextplayer = nextplayer - players.size();
+                    nextplayer = nextplayer - (players.size() -1);
                 } else {
                     nextplayer = i + 1;
                 }
@@ -111,7 +111,8 @@ public class Game {
         if (!deck.isEmpty()){
             for (Player player : players
             ) {
-                for (int i = 0; i < howmuchtodeal(player); i++) {
+                int cardQuantity = howmuchtodeal(player);
+                for (int i = 0; i < cardQuantity; i++) {
                     //рандомно вытягиваем карту из колоды и даем в руки каждому  играку
                     int randomindex = random.nextInt(deck.size());
                     player.addCard(deck.get(randomindex));
@@ -130,6 +131,7 @@ public class Game {
         for (Player player:players){
             player.setTramp(trump);
         }
+        System.out.println("Trump is " + trump);
     }
 
     // игрок с найменьшим козырем будет в начале списка игроков
@@ -142,6 +144,7 @@ public class Game {
         };
         this.players.sort(trumpComparator);
         players.get(0).setAtcker(true);
+        System.out.println(players.get(0).name + " Is game starter");
 
     }
 

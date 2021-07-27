@@ -55,8 +55,10 @@ public class ConsolePlayer extends Player {
         }
         System.out.println("Enter Card Number !");
         Scanner scanner = new Scanner(System.in);
+        Card card = hand.get(scanner.nextInt());
+        hand.remove(card);
 
-        return hand.get(scanner.nextInt());
+        return card ;
 
     }
 
