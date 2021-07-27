@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 public class ConsolePlayer extends Player {
 
 
-
     public ConsolePlayer(String name) {
         super.name = name;
     }
@@ -17,30 +16,43 @@ public class ConsolePlayer extends Player {
     public Card Respond(ArrayList<Card> table) {
 
         System.out.println("is you turn now, u must beat this card");
-        Card card = table.get(table.size()-1);
+        Card card = table.get(table.size() - 1);
         System.out.println(card);
+        List<Card> biggestInHand = new ArrayList<>();
+
+        if (!card.getSuit().equals(getTramp())) {
+            biggestInHand = hand.stream().filter(
+                    (a) -> a.getSuit().equals(card.getSuit())).filter(
+                    (a) -> a.getRank().ordinal() > card.getRank().ordinal()).collect(Collectors.toList());
+            //добавляем козыри
+            biggestInHand.addAll(hand.stream().filter((a) -> a.getSuit().equals(getTramp())).collect(Collectors.toList()));
+        } else {
 
 
-        List<Card> bigestInHand = hand.stream().filter(
-                (a) -> a.getSuit().equals(card.getSuit())).filter(
-                (a) -> a.getRank().ordinal() > card.getRank().ordinal()).collect(Collectors.toList());
-        //добавляем козыри
-        bigestInHand.addAll(hand.stream().filter((a)->a.getSuit().equals(getTramp())).collect(Collectors.toList()));
-
-
-        if(bigestInHand.size()>0){
-            Scanner scanner =  new Scanner(System.in);
-            System.out.println("Select one of those cards");
-            for (int i = 0; i < bigestInHand.size(); i++) {
-                System.out.println(i+" : " + bigestInHand.get(i));
-            }
-            int choice  =  scanner.nextInt();
-            hand.remove(bigestInHand.get(choice));
-            return bigestInHand.get(choice);
+                biggestInHand.addAll(hand.stream().filter((a) -> a.getSuit().equals(getTramp())).collect(Collectors.toList()));
 
         }
-        else {
-            System.out.println("You cant beat this card");
+
+
+        if (!biggestInHand.isEmpty()) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Select one of those cards");
+            for (int i = 0; i < biggestInHand.size(); i++) {
+                System.out.println(i + " : " + biggestInHand.get(i));
+            }
+            System.out.println("Or type 99 to get card");
+            int choice = scanner.nextInt();
+            if (choice != 99) {
+                hand.remove(biggestInHand.get(choice));
+                return biggestInHand.get(choice);
+            } else {
+
+                System.out.println("You are decided to take a card");
+                return null;
+            }
+
+        } else {
+            System.out.println("You can't beat this card");
             return null;
         }
 
@@ -58,7 +70,7 @@ public class ConsolePlayer extends Player {
         Card card = hand.get(scanner.nextInt());
         hand.remove(card);
 
-        return card ;
+        return card;
 
     }
 

@@ -19,12 +19,15 @@ public class Bot extends Player{
         //добавляем козыри
         bigestInHand.addAll(hand.stream().filter((a)->a.getSuit().equals(getTramp())).collect(Collectors.toList()));
         if(bigestInHand.size() == 0){
+            System.out.println(this.name + " Cant beat your card !! And taking " + card.toString());
             return null;
 
         } else {
             int randNumber = random.nextInt(bigestInHand.size());
-            hand.remove(bigestInHand.get(randNumber));
-            return bigestInHand.get(randNumber);
+            Card responsiveCard  = bigestInHand.get(randNumber);
+            hand.remove(responsiveCard);
+            System.out.println(this.name + " Beat your card with " + responsiveCard.toString());
+            return responsiveCard;
         }
 
     }
