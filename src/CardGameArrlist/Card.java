@@ -14,10 +14,8 @@ private Suit suit;
 
     @Override
     public String toString() {
-        return "Card{" +
-                "rank=" + rank +
-                ", suit=" + suit +
-                '}';
+        return rank +
+                " " + suit.toString();
     }
 
     public Rank getRank() {

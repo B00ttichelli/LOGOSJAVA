@@ -3,7 +3,7 @@ package CardGameArrlist;
 import java.util.*;
 
 public class Game {
-    private static Scanner scanner = new Scanner(System.in);
+    private static  Scanner scanner = new Scanner(System.in);
     private static Random random = new Random();
     private ArrayList<Card> deck = new ArrayList<>();
     private ArrayList<Card> table = new ArrayList<>();
@@ -66,6 +66,8 @@ public class Game {
                         }
 
                         table.clear();
+                        //// проблема ниже здеся скорее всего
+
                         if (nextPlayer + 1 >= players.size()) {
                             players.get(players.size() - (nextPlayer + 1)).setAtcker(true);
                         } else {
@@ -78,11 +80,7 @@ public class Game {
                             players.removeAll(winner);
                         }
                     } else {
-                        for (Card card : table
-                        ) {
-                            discarded.add(card);
-
-                        }
+                        discarded.addAll(table);
                         table.clear();
                         players.get(nextPlayer).setAtcker(true);
                         dealCards();
@@ -143,13 +141,8 @@ public class Game {
 
     // функция определения геймстартера игрок с найменьшим козырем будет в начале списка игроков
     private void declareBeginner() {
-        Comparator<Player> trumpComparator = new Comparator<>() {
-            @Override
-            public int compare(Player player, Player t1) {
-                return player.lowTrump(trump).compareTo(t1.lowTrump(trump));
-            }
-        };
-        this.players.sort(trumpComparator);
+
+        this.players.sort(Comparator.comparing(player -> player.lowTrump(trump)));
         players.get(0).setAtcker(true);
         System.out.println(players.get(0).name + " Is game starter");
 

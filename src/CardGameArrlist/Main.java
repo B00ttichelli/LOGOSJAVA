@@ -9,6 +9,8 @@ public class Main {
         game.initGame();
         game.startGame();
 
+        //есть проблема геймстартер при снятии получает снова ход
+
 
     }
 }
