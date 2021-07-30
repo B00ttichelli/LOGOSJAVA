@@ -101,7 +101,7 @@ public class Game {
         }
 
         winner.forEach(a-> System.out.println(a.name));
-        System.out.println("are Winners");
+        System.out.println("are Winner");
     }
 
     // функция определения недостающих карт у игрока
