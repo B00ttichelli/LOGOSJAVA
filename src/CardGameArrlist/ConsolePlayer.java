@@ -14,10 +14,8 @@ public class ConsolePlayer extends Player {
 
     @Override
     public Card Respond(ArrayList<Card> table) {
-
-        System.out.println("is you turn now, u must beat this card");
         Card card = table.get(table.size() - 1);
-        System.out.println(card);
+        System.out.println("U must beat this card : " + card);
         List<Card> biggestInHand = new ArrayList<>();
 
         if (!card.getSuit().equals(getTramp())) {
@@ -29,14 +27,14 @@ public class ConsolePlayer extends Player {
         } else {
 
 
-                biggestInHand.addAll(hand.stream().filter((a) -> a.getSuit().equals(getTramp())).collect(Collectors.toList()));
+            biggestInHand.addAll(hand.stream().filter((a) -> a.getSuit().equals(getTramp())).collect(Collectors.toList()));
 
         }
 
 
         if (!biggestInHand.isEmpty()) {
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Select one of those cards");
+            System.out.println("Select one on your choice");
             for (int i = 0; i < biggestInHand.size(); i++) {
                 System.out.println(i + " : " + biggestInHand.get(i));
             }
@@ -52,7 +50,7 @@ public class ConsolePlayer extends Player {
             }
 
         } else {
-            System.out.println("You can't beat this card");
+            System.out.println("You can't beat this card and u taking it");
             return null;
         }
 
