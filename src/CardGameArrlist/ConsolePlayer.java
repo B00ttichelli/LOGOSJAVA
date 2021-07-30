@@ -16,7 +16,7 @@ public class ConsolePlayer extends Player {
     public Card Respond(ArrayList<Card> table) {
         Card card = table.get(table.size() - 1);
         System.out.println("U must beat this card : " + card);
-        List<Card> biggestInHand = new ArrayList<>();
+        List<Card> biggestInHand ;
 
         if (!card.getSuit().equals(getTramp())) {
             biggestInHand = hand.stream().filter(
@@ -25,9 +25,10 @@ public class ConsolePlayer extends Player {
             //добавляем козыри
             biggestInHand.addAll(hand.stream().filter((a) -> a.getSuit().equals(getTramp())).collect(Collectors.toList()));
         } else {
-
-
-            biggestInHand.addAll(hand.stream().filter((a) -> a.getSuit().equals(getTramp())).collect(Collectors.toList()));
+            // итак нахуй козырное тут всьо )))
+            biggestInHand = hand.stream().filter(
+                    (a) -> a.getSuit().equals(card.getSuit())).filter(
+                    (a) -> a.getRank().ordinal() > card.getRank().ordinal()).collect(Collectors.toList());
 
         }
 

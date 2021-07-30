@@ -49,6 +49,6 @@ public class Bot extends Player{
     }
 
     public Bot() {
-        super.name = "Робот Василий";
+        super.name = "MegaTron";
     }
 }
