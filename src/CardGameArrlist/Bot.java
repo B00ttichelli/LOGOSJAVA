@@ -34,7 +34,7 @@ public class Bot extends Player{
             int randNumber = random.nextInt(bigestInHand.size());
             Card responsiveCard  = bigestInHand.get(randNumber);
             hand.remove(responsiveCard);
-            System.out.println(this.name + " Beat your card with " + responsiveCard.toString());
+            System.out.println(this.name + " Beat your card with " + responsiveCard);
             return responsiveCard;
         }
 
