@@ -31,8 +31,9 @@ public class Game {
     public void initGame() {
         generateDeck(); ///генерируем новую колоду
         System.out.println("Type your name"); // спрашиваем имя пользователя
-        players.add(new ConsolePlayer(scanner.next())); //добавляем нового игрока с заданым именем в список
+//        players.add(new ConsolePlayer(scanner.next())); //добавляем нового игрока с заданым именем в список
         players.add(new Bot()); //добавляем нового бота в список игроков
+        players.add(new Bot("TretiyLishniy"));
         dealCards(); // раздали карты
         setTrump(); // определили козырь
         declareBeginner(); //обявили начинающего
@@ -88,7 +89,7 @@ public class Game {
                             winner.add(players.get(i));
                             players.removeAll(winner);
                         }
-                        if (players.get(nextPlayer).getHand().isEmpty()) {
+                        if (players.get(nextPlayer).getHand().isEmpty()) {  ///тоже тугая строка
                             winner.add(players.get(nextPlayer));
                             players.removeAll(winner);
                         }
